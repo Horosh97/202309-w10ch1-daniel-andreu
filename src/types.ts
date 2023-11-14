@@ -1,6 +1,10 @@
-interface Thing {
+export interface Thing {
   id: number;
   name: string;
   difficulty: string;
 }
-export default Thing;
+
+export interface ThingWhitoutId {
+  name: string;
+  difficulty: string;
+}
