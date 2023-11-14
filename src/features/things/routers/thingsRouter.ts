@@ -21,4 +21,18 @@ thingsRouter.get("/:thingId", (req, res) => {
   res.status(200).json({ thing });
 });
 
+thingsRouter.delete("/:idThing", (req, res) => {
+  const id = req.params.idThing;
+
+  const thingIndex = things.findIndex((thing) => thing.id === +id);
+
+  if (thingIndex === -1) {
+    res.status(404).json({});
+    return;
+  }
+
+  things.splice(thingIndex, 1);
+
+  res.status(200).json({});
+});
 export default thingsRouter;
