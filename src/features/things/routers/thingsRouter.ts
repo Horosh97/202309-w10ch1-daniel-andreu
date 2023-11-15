@@ -1,40 +1,16 @@
 import { Router } from "express";
-import things from "../data/things.js";
-import type { Thing } from "../../../types.js";
+import ThingsController from "../controller/ThingsController.js";
 
 const thingsRouter = Router();
 
-thingsRouter.get("/", (_req, res) => {
-  res.status(200);
-  res.json({ things });
-});
+const thingsController = new ThingsController();
 
-thingsRouter.get("/:thingId", (req, res) => {
-  const { thingId } = req.params;
+thingsRouter.get("/", thingsController.getThings);
 
-  const thing = things.find((thing: Thing) => thing.id === +thingId);
+thingsRouter.get("/:thingId", thingsController.getThingById);
 
-  if (!thing) {
-    res.status(404).json({ error: "Thing not found" });
-    return;
-  }
+thingsRouter.delete("/:idThing", thingsController.deleteThingById);
 
-  res.status(200).json({ thing });
-});
-
-thingsRouter.delete("/:idThing", (req, res) => {
-  const id = req.params.idThing;
-
-  const thingIndex = things.findIndex((thing) => thing.id === +id);
-
-  if (thingIndex === -1) {
-    res.status(404).json({});
-    return;
-  }
-
-  things.splice(thingIndex, 1);
-
-  res.status(200).json({});
-});
+thingsRouter.post("/", thingsController.addNewThing);
 
 export default thingsRouter;
