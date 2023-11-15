@@ -9,5 +9,4 @@ app.use(morgan("dev"));
 app.use(express.json());
 
 app.use("/", pingRouter);
-
 app.use("/things", thingsRouter);
