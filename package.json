@@ -6,9 +6,9 @@
   "type": "module",
   "scripts": {
     "start": "node .",
-    "start:dev": "node . --watch",
+    "start:dev": "node --watch .",
     "build": "tsc",
-    "build:dev": "tsc --watch"
+    "build:dev": "tsc -w"
   },
   "keywords": [],
   "author": "",
